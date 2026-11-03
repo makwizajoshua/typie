@@ -10,6 +10,4 @@ class Message(Base):
 
     author: Mapped[int] = mapped_column(nullable=False)
     recipient: Mapped[int] = mapped_column(nullable=False)
-    created_at: datetime = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(UTC)
-    )
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
