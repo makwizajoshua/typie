@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,intial-scale=1.0>
+        <title>Typie - Connect Your Way</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Typie</h1>
+        </header>
+        <div class="app">
+            <!-- sidebar -->
+             <aside class="sidebar">
+                <div class="brand">
+                    <h1>Typie<span></span></h1>
+                    <p>Your people your space</p>
+                </div> 
+                <div class="sidebar-heading">
+                    <h3>Messages</h3>
+                    <button class="new-chat">+</button>
+                    </div>
+
+                    <div class="chat-list" id="chatList">
+
+                        <div class="chat-person active">
+                            <div class="avatar pink">J</div>
+                            <div class="person info">
+                                <h4>Joshua</h4>
+                                <P>Heyyy! How are you doing?</P>
+                            </div>
+                            <span class="time">12:30 pm</span>
+
+                </div>
+                <div class="chat-person">
+                    <div class="avator orage">V</div>
+                    <div class="person-info">
+                        <h4>my people</h4>
+                        <p>Veronica: That's so funny</p>
+                    </div>
+                    <span class="time">10:20</span>
+
+               </div>
+
+               <div class="chat-person">
+                <div class="avatar blue">C</div>
+                <DIV class="person-info"></DIV>
+                <h4>Chrissy</h4>
+                <p>Please share me some money!</p>
+               </div>
+               <span class="time">09:15</span>
+               </div>
+
+               </div>
+
+               <nav class="bottom nav">
+                <button class="nav-item active">Chats</button>
+                <button class="nav-item">Calls</button>
+                <button class="nav-item">Profile</button>
+               </nav>
+
+            </aside>
+
+            <!--main chat area-->
+            <main class="chat area">
+
+                <header class="chat-header">
+                    <div class="avatar pink">J</div>
+                    <div>
+                        <h3>Joshua</h3>
+                        <p class="online">online</p>
+                    </div>
+
+                </header>
+                <section class="messages" id="messages">
+                    <div class="date-label">TODAY</div>
+                    <div class="message received">
+                        Heyyy! how are you?
+                        <span>12:28
+                        </span>
+                    </div>
+                    <div class="message received">
+                        I'm doing good
+                        <span>12:30</span>
+                    </div>
+                </section>
+
+                <form class="message-form" id="messageForm">
+                    <button type="button" class="attach">+</button>
+
+                    <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Type something lovely..."
+                    autocomplete="off"
+                    >
+                    <button type="submit" class="send-button"></button>
+                </form>
+            </main>
+        </div>
+
+        <script src="script.js"></script>
+        </body>
+</html>
+

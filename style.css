@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=poppins:wght@400;500;600;700;800&display=swap');
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #f8f4ff;
+    color:#29243a
+}
+
+button, input {
+    font-family: inherit;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+}
+
+.app {
+    display: flex;
+    height: 100vh;
+    padding:20px;
+    gap: 18px;
+}
+
+/*sidebar*/
+.sidebar {
+    width: 340px;
+    min-width: 290px;
+    background: white;
+    border-radius: 22px;
+    padding:25px 18px;
+    display:flex;
+    flex-direction: column;
+    box-shadow: 0 8px 35px #4433660c;
+}
+
+.sidebar h2{
+    font-size: 24px;
+    margin-bottom: 24px
+}
+
+.search-box{
+    width:100%;
+    padding: 13px;
+    border-radius:12px;
+    border:1px solid #eee;
+    background: #f8f4ff;
+    outline: none;
+    margin-bottom: 20px;
+
+}
+
+.chat-list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.chat-item{
+    display:flex;
+    align-items: center;
+    gap: 12px
+    padding: 13px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.chat-item:hover {
+    background: #f3eaff;
+}
+.chat-item.active {
+    background: #eee3ff;
+}
+
+.chat-item img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat-info h4{
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+.chat-info p {
+    font-size:12px;
+    color: #888;
+}
+
+/*MAIN CHAT*/
+.chat-area {
+    flex:1;
+    background: white;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0,05);
+}
+.chat-header {
+    display:flex ;
+    align-items:center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #f0edf5;
+}
+.chat-header h3 {
+    font-size: 18px;
+}
+
+.chat-header p{
+    font-size: 12px;
+    color:#888;
+}
+.messages{
+    flex:1;
+    padding: 25px;
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+.message {
+    max-width: 65%;
+    padding: 13px 17px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.message.received {
+    background: #f2edfa;
+    align-self:flex-start;
+    border-bottom-left-radius: 4px;
+}
+.message.sent {
+    background:3a879ed;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
