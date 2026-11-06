@@ -6,14 +6,15 @@
 """
 
 import bcrypt
-from backend.app.schemas.auth_credentials import AuthenticatedUser, Credentials
-from backend.app.util import get_current_user, make_token
-from db import get_db
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-from models.user import User
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+
+from db import get_db
+from models.user import User
+from schemas.auth_credentials import AuthenticatedUser, Credentials
+from util import get_current_user, make_token
 
 router = APIRouter(prefix="auth", tags=["auth"])
 

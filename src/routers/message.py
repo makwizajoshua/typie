@@ -1,11 +1,12 @@
-from backend.app.db import get_db
-from backend.app.models.message import Message
-from backend.app.models.user import User
-from backend.app.schemas.message_body import MessageBody
-from backend.app.util import get_current_user
 from fastapi import APIRouter, Depends
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
+
+from db import get_db
+from models.message import Message
+from models.user import User
+from schemas.message_body import MessageBody
+from util import get_current_user
 
 router = APIRouter(prefix="/message", tags=["message"])
 

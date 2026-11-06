@@ -2,12 +2,13 @@ import os
 from datetime import UTC, datetime, timedelta
 
 import jwt
-from backend.app.db import get_db
-from backend.app.models.user import User
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
+
+from db import get_db
+from models.user import User
 
 load_dotenv()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
@@ -39,7 +40,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     """
     SECRET_KEY = os.environ["SECRET_KEY"]
     try:
-        payload = jwt.decode(token, SECRET_KEY, "HS256")
+        payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         user = db.get(User, payload["sub"])
     except (jwt.PyJWTError, ValueError, KeyError):
         user = None
