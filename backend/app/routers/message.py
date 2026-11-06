@@ -12,7 +12,7 @@ router = APIRouter(prefix="/message", tags=["message"])
 
 @router.get("/all/{chatroom_id}")
 def get_all_messages(chatroom_id: int, db: Session = Depends(get_db)):
-    statement = select(Message).where(Message.recipient == chatroom_id)
+    statement = select(Message).where(Message.chatroom_id == chatroom_id)
     messages = db.scalars(statement)
     return messages
 
