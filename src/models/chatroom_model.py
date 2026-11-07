@@ -1,9 +1,16 @@
-from sqlalchemy import ForeignKey
+from sqlalchemy import Column, ForeignKey, Table
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db import Base
-from src.models.message_model import Message
-from src.models.user_model import User
+from models.message_model import Message
+from models.user_model import User
+
+chatroom_clients = Table(
+    "chatroom_clients",
+    Base.metadata,
+    Column("chatroom_id", ForeignKey("chatrooms.id"), primary_key=True),
+    Column("user_id", ForeignKey("users.id"), primary_key=True),
+)
 
 
 class ChatRoom(Base):
@@ -11,10 +18,9 @@ class ChatRoom(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True, index=True)
-    client_ids: Mapped[list[int]] = mapped_column(ForeignKey("users.id"), index=True)
 
     clients: Mapped[list["User"]] = relationship(
-        back_populate="users", cascade="all, delete-orphan"
+        secondary=chatroom_clients, back_populates="chatrooms"
     )
     messages: Mapped[list["Message"]] = relationship(
         back_populates="chatroom", cascade="all, delete-orphan"

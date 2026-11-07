@@ -1,10 +1,10 @@
 from datetime import UTC, datetime
 
-from sqlalchemy import DateTime, ForeignKey, String
+from sqlalchemy import DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db import Base
-from src.models.chatroom_model import ChatRoom
+from models.chatroom_model import ChatRoom
 from src.schemas.auth_schema import AuthenticatedUser
 
 
@@ -19,10 +19,9 @@ class User(Base):
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     image_file: Mapped[str | None] = mapped_column(String(200), nullable=True, default=None)
-    chatroom_ids: Mapped[list[int]] = mapped_column(ForeignKey("chatrooms.id"))
 
     chatrooms: Mapped[list["ChatRoom"]] = relationship(
-        back_populates="chatrooms", cascade="all, delete-orphan"
+        secondary="chatroom_clients", back_populates="clients"
     )
 
     @property

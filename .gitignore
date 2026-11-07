@@ -1,3 +1,4 @@
 .env
 typie/
 __pycache__/
+database.db

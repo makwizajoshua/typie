@@ -11,4 +11,13 @@ class MessageBase(BaseModel):
 
 
 MessageCreate = MessageBase
+
+
+class MessageUpdate(BaseModel):
+    content: str | None = Field(default=None, max_length=512)
+    created_at: datetime | None = Field(default=None)
+    author_id: int | None = Field(default=None)
+    chatroom_id: int | None = Field(default=None)
+
+
 MessageResponse = MessageBase

@@ -31,7 +31,7 @@ def create_chatroom(
         )
 
     chatroom_clients = list(set(clients))
-    new_chatroom = ChatRoom(clients=chatroom_clients)
+    new_chatroom = ChatRoom(name=chatroom_data.name, clients=chatroom_clients)
 
     db.add(new_chatroom)
     db.commit()
@@ -61,6 +61,35 @@ def join_chatroom(chatroom_id: int, user_id: int, db: Annotated[Session, Depends
         db.refresh(chatroom)
 
     return {"message": "User joined chatroom successfully", "chatroom": chatroom}
+
+
+@router.patch("/update/{chatroom_id}", status_code=status.HTTP_200_OK)
+def edit_chatroom(
+    chatroom_id: int, chatroom_data: ChatroomBase, db: Annotated[Session, Depends(get_db)]
+):
+    chatroom = db.get(ChatRoom, chatroom_id)
+    if not chatroom:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail={"error": "Chatroom not found"}
+        )
+
+    new_clients = db.execute(select(User).where(User.id.in_(chatroom_data.clients))).scalars().all()
+    if not new_clients:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail={"error": "No valid clients found"}
+        )
+
+    new_clients = []
+    new_clients.extend(chatroom.clients)
+    new_clients.extend(
+        db.execute(select(User).where(User.id.in_(chatroom_data.clients))).scalars().all()
+    )
+    chatroom.clients = list(set(new_clients))
+
+    db.commit()
+    db.refresh(chatroom)
+
+    return {"message": "Chatroom updated successfully", "chatroom": chatroom}
 
 
 @router.delete("/delete/{chatroom_id}")
