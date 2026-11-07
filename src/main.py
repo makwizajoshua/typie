@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from routers.auth import router as auth_router
-from routers.chatroom import router as ch_router
-from routers.message import router as msg_router
+from src.routers.auth_router import router as auth_router
+from src.routers.chatroom_router import router as ch_router
+from src.routers.message_router import router as msg_router
 
 from .db import Base, engine
 
@@ -24,6 +25,8 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(msg_router)
 app.include_router(ch_router)
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.get("/health")

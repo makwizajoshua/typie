@@ -1,10 +1,10 @@
 from datetime import UTC, datetime
 
-from chatroom import ChatRoom
 from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db import Base
+from src.models.chatroom_model import ChatRoom
 
 
 class Message(Base):
@@ -12,7 +12,7 @@ class Message(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     author: Mapped[int] = mapped_column(nullable=False)
-    recipient: Mapped[int] = mapped_column(nullable=False)
+    content: Mapped[str] = mapped_column(nullable=False, length=512)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(UTC))
     chatroom_id: Mapped[int] = mapped_column(ForeignKey("chatrooms.id"), index=True)
 
